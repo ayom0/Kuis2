@@ -5,13 +5,15 @@ public class Kuis06Ayom {
         Scanner sc = new Scanner(System.in);
         System.out.print("Jumlah pelanggan hari ini: ");
         int n = sc.nextInt();
-        int totalBerat = 0 , jumlahTarifTambahan = 0 , totalBiaya = 0 , biayaTertinggi = 0;
+        int totalBerat = 0, jumlahTarifTambahan = 0, totalBiaya = 0, biayaTertinggi = 0 , jumlahPelanggan = 0;
+        int nim2 = 41;
+        int kapasitas = (nim2 % 10) + 10; 
 
+        
         for (int i = 1; i <= n; i++) {
             System.out.print("Berat cucian pelanggan ke-" + i + " (kg): ");
             int arusMasuk = sc.nextInt();
-
-           
+            
             if (arusMasuk < 1 || arusMasuk > 20) {
                 System.out.println("Input tidak valid, ulangi.");
                 i--;
@@ -31,17 +33,21 @@ public class Kuis06Ayom {
             
             totalBiaya += biaya;
             totalBerat += berat;
-
-           
+            jumlahPelanggan++;
+            
             if (biaya > biayaTertinggi) {
                 biayaTertinggi = biaya;
             }
             
             System.out.println("  Biaya: Rp " + biaya);
+            if (totalBerat >= kapasitas) {
+                System.out.println("Kapasitas total cucian (" + kapasitas + " kg) telah tercapai. Pendaftaran ditutup.");
+                break;
+            }
         }
 
-        double rataBerat = (n > 0) ? (double) totalBerat / n : 0;
-        
+        double rataBerat = (jumlahPelanggan > 0) ? (double) totalBerat / jumlahPelanggan : 0;
+
         System.out.println("=== REKAP HARIAN ===");
         System.out.println("Total pemasukan : Rp " + totalBiaya);
         System.out.println("Rata-rata berat : " + rataBerat + " kg");
